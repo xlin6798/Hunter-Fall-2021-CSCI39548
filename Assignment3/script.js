@@ -4,7 +4,12 @@ let colorSelected;
 
 //Add a row
 function addR() {
-    alert("Clicked Add Row")
+    let row = grid.insertRow(grid.rows.length);
+    for (let i = 0; i < numCols; i++) {
+        let cell = row.insertCell(i);
+        cell.onclick = selected;
+    }
+    numRows++;
 }
 //Add a column
 function addC() {
