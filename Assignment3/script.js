@@ -64,11 +64,12 @@ function fill() {
 }
 
 function clearAll() {
-    while (numRows > 0) {
-        console.log(numRows);
-        removeR();
+    colorSelected = document.getElementById("selectedID").value;
+    for (let r = 0; r < numRows; r++) {
+        for (let c = 0; c < numCols; c++) {
+            grid.rows[r].cells[c].style.backgroundColor = "transparent";
+        }
     }
-    numCols = 0;
 }
 
 function fillU() {
