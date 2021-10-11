@@ -61,5 +61,12 @@ function clearAll() {
 }
 
 function fillU() {
-    alert("Clicked Fill All Uncolored")
+    colorSelected = document.getElementById("selectedID").value;
+    for (let r = 0; r < numRows; r++) {
+        for (let c = 0; c < numCols; c++) {
+            let cell = grid.rows[r].cells[c];
+            if (cell.style.backgroundColor == "")
+                cell.style.backgroundColor = colorSelected;
+        }
+    }
 }
