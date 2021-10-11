@@ -5,6 +5,13 @@ let colorSelected;
 //Add a row
 function addR() {
     let row = grid.insertRow(grid.rows.length);
+    if (numRows + numCols == 0) {
+        let cell = grid.rows[0].insertCell(numCols);
+        cell.onclick = selected;
+        numRows++;
+        numCols++;
+        return;
+    }
     for (let i = 0; i < numCols; i++) {
         let cell = row.insertCell(i);
         cell.onclick = selected;
@@ -13,6 +20,10 @@ function addR() {
 }
 //Add a column
 function addC() {
+    if (numRows + numCols == 0) {
+        addR();
+        return;
+    }
     for (let i = 0; i < numRows; i++) {
         let cell = grid.rows[i].insertCell(numCols);
         cell.onclick = selected;
