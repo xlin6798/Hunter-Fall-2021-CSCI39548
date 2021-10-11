@@ -13,7 +13,11 @@ function addR() {
 }
 //Add a column
 function addC() {
-    alert("Clicked Add Col")
+    for (let i = 0; i < numRows; i++) {
+        let cell = grid.rows[i].insertCell(numCols);
+        cell.onclick = selected;
+    }
+    numCols++;
 }
 
 //Remove a row
