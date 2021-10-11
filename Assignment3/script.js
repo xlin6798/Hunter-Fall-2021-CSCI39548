@@ -40,6 +40,7 @@ function removeC() {
 function selected() {
     colorSelected = document.getElementById("selectedID").value;
     console.log(colorSelected);
+    this.style.backgroundColor = colorSelected;
 }
 
 function fill() {
