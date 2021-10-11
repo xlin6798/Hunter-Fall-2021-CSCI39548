@@ -1,4 +1,4 @@
-# Assignment2
+# Assignment3
 Assignment 3 for course CSCI 39548 Practical Web Development
 
 Github Username: xlin6798
