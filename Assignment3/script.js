@@ -53,7 +53,11 @@ function fill() {
 }
 
 function clearAll() {
-    alert("Clicked Clear All")
+    while (numRows > 0) {
+        console.log(numRows);
+        removeR();
+    }
+    numCols = 0;
 }
 
 function fillU() {
