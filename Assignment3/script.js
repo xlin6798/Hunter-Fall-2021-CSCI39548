@@ -29,7 +29,12 @@ function removeR() {
 }
 //Remove a column
 function removeC() {
-    alert("Clicked Remove Col")
+    if (numCols > 0) {
+        for (let i = 0; i < numRows; i++) {
+            grid.rows[i].deleteCell(numCols - 1);
+        }
+        numCols--;
+    }
 }
 //sets global var for selected color
 function selected() {
