@@ -22,7 +22,10 @@ function addC() {
 
 //Remove a row
 function removeR() {
-    alert("Clicked Remove Row")
+    if (numRows > 0) {
+        grid.deleteRow(numRows - 1);
+        numRows--;
+    }
 }
 //Remove a column
 function removeC() {
