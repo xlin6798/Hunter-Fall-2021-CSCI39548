@@ -6,7 +6,7 @@ function UserProfile({ user }) {
             <h1>User Profile</h1>
             <div>Username: {user.userName}</div>
             <div>Member Since: {user.memberSince}</div>
-            <Link to="/">Return to Home</Link>
+            <Link to="/bank-of-react">Return to Home</Link>
         </div>
     );
 }

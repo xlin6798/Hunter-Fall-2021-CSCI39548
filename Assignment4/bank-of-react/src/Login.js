@@ -13,7 +13,7 @@ function LogIn({ mockLogIn }) {
     )
 
     function handleChange(e) {
-        const updatedUser = {user};
+        const updatedUser = {...user};
         const inputField = e.target.name;
         const inputValue = e.target.value;
         updatedUser[inputField] = inputValue;
@@ -29,7 +29,7 @@ function LogIn({ mockLogIn }) {
     return (
         <>
             {redirect ?
-                (<Redirect to="/userProfile" />)
+                (<Redirect to="/bank-of-react/userProfile" />)
                 : (
                     <div>
                         <form onSubmit={handleSubmit} >

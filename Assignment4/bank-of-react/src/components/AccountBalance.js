@@ -1,7 +1,7 @@
-function AccountBalance( {user} ) {
+function AccountBalance({ balance }) {
     return (
         <div>
-            Balance: {user.accountBalance}
+            Balance: {balance}
         </div>
     );
 }
