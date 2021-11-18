@@ -16,14 +16,18 @@ function Debit({ debits, addDebit, balance }) {
     function onSubmit(e) {
         e.preventDefault();
         const deb = debit;
+        deb.amount = +(+deb.amount).toFixed(2);
         deb.date = Date().toLocaleString();
-        deb.amount = (+deb.amount).toFixed(2);
         addDebit(deb);
-        setDebit("");
+        setDebit({
+            amount: "",
+            description: "",
+            date: ""
+        });
     }
 
     function onChange(e) {
-        const newDebit = {...debit};
+        const newDebit = { ...debit };
         const inputField = e.target.placeholder;
         const inputValue = e.target.value;
         newDebit[inputField] = inputValue;
@@ -31,8 +35,9 @@ function Debit({ debits, addDebit, balance }) {
     }
 
     return (
-        <>
-            <h1> Debit </h1> <h3> <AccountBalance balance={balance}></AccountBalance> </h3>
+        <div className="container text-center">
+            <h1 className="display-1"> Debits </h1>
+            <AccountBalance balance={balance}></AccountBalance>
             <Link to="/bank-of-react">Home</Link>
             <Form onSubmit={onSubmit}>
                 <FloatingLabel
@@ -40,13 +45,21 @@ function Debit({ debits, addDebit, balance }) {
                     label="Amount"
                     className="mb-3"
                 >
-                    <Form.Control type="text" placeholder="amount" onChange={onChange} value={debit.amount || ""} />
+                    <Form.Control
+                        required type="number"
+                        placeholder="amount"
+                        onChange={onChange}
+                        value={debit.amount || ""} />
                 </FloatingLabel>
                 <FloatingLabel controlId="floatingPassword" label="Description">
-                    <Form.Control type="text" placeholder="description" onChange={onChange} value={debit.description || ""} />
+                    <Form.Control
+                        required type="text"
+                        placeholder="description"
+                        onChange={onChange}
+                        value={debit.description || ""} />
                 </FloatingLabel>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Add Debit
                 </Button>
             </Form>
             <Table striped bordered hover>
@@ -59,17 +72,18 @@ function Debit({ debits, addDebit, balance }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {debits.map((deb, indx) => (
+                    {debits.length > 0 ? debits.map((deb, indx) => (
                         <tr key={indx}>
                             <th> {indx + 1} </th>
                             <th> {deb.date} </th>
                             <th> {deb.amount} </th>
                             <th> {deb.description} </th>
                         </tr>
-                    ))}
+                    )) :
+                    <p>none</p>}
                 </tbody>
             </Table>
-        </>
+        </div>
     )
 }
 

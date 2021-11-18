@@ -14,8 +14,8 @@ function App() {
         userName: 'joe_shmo',
         memberSince: '07/23/96',
     });
-    const [credits, setCredits] = useState([{amount: 0, description: "hi", date: "1"}]);
-    const [debits, setDebits] = useState();
+    const [credits, setCredits] = useState([{amount: 0, description: "empty", date: "11/11"}]);
+    const [debits, setDebits] = useState([{amount: 0, description: "empty", date: "11/11"}]);
 
     useEffect(() => {
         async function fetchData() {
@@ -32,7 +32,7 @@ function App() {
             credits.forEach((credit) => {
                 creditSum += credit.amount
             })
-            setAccountBalance((creditSum - debitSum).toFixed(2));
+            setAccountBalance(+(creditSum - debitSum).toFixed(2));
         }
         fetchData();
     }, [])
@@ -45,22 +45,12 @@ function App() {
 
     function addDebit(deb) {
         setDebits(debits.concat(deb));
+        setAccountBalance(accountBalance + deb.amount);
     }
 
     function addCredit(cred) {
         setCredits(credits.concat(cred));
-        updateBal();
-    }
-
-    function updateBal() {
-        let balance = 0;
-        credits.map(cred => (
-            balance -= cred.amount
-        ))
-        debits.map(deb => (
-            balance += deb.amount
-        ))
-        setAccountBalance(balance);
+        setAccountBalance(accountBalance - cred.amount);
     }
 
     return (
@@ -76,7 +66,7 @@ function App() {
                     <UserProfile user={currentUser} />
                 </Route>
                 <Route exact path="/bank-of-react/Debit">
-                    <Debit balance={accountBalance} debits={debits} />
+                    <Debit balance={accountBalance} addDebit={addDebit} debits={debits} />
                 </Route>
                 <Route exact path="/bank-of-react/Credit">
                     <Credit balance={accountBalance} addCredit={addCredit} credits={credits} />
