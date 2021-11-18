@@ -16,14 +16,18 @@ function Credit({ credits, addCredit, balance }) {
     function onSubmit(e) {
         e.preventDefault();
         const cred = credit;
+        cred.amount = +(+cred.amount).toFixed(2);
         cred.date = Date().toLocaleString();
-        cred.amount = (+cred.amount).toFixed(2);
         addCredit(cred);
-        setCredit("");
+        setCredit({
+            amount: "",
+            description: "",
+            date: ""
+        });
     }
 
     function onChange(e) {
-        const newCredit = {...credit};
+        const newCredit = { ...credit };
         const inputField = e.target.placeholder;
         const inputValue = e.target.value;
         newCredit[inputField] = inputValue;
@@ -31,8 +35,9 @@ function Credit({ credits, addCredit, balance }) {
     }
 
     return (
-        <>
-            <h1> Credit </h1> <h3> <AccountBalance balance={balance}></AccountBalance> </h3>
+        <div className="container text-center">
+            <h1 className="display-1"> Credits </h1>
+            <AccountBalance balance={balance}></AccountBalance>
             <Link to="/bank-of-react">Home</Link>
             <Form onSubmit={onSubmit}>
                 <FloatingLabel
@@ -40,13 +45,21 @@ function Credit({ credits, addCredit, balance }) {
                     label="Amount"
                     className="mb-3"
                 >
-                    <Form.Control type="text" placeholder="amount" onChange={onChange} value={credit.amount || ""} />
+                    <Form.Control
+                        required type="number"
+                        placeholder="amount"
+                        onChange={onChange}
+                        value={credit.amount || ""} />
                 </FloatingLabel>
                 <FloatingLabel controlId="floatingPassword" label="Description">
-                    <Form.Control type="text" placeholder="description" onChange={onChange} value={credit.description || ""} />
+                    <Form.Control
+                        required type="text"
+                        placeholder="description"
+                        onChange={onChange}
+                        value={credit.description || ""} />
                 </FloatingLabel>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Add Credit
                 </Button>
             </Form>
             <Table striped bordered hover>
@@ -59,17 +72,18 @@ function Credit({ credits, addCredit, balance }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {credits.map((cred, indx) => (
+                    {credits.length > 0 ? credits.map((cred, indx) => (
                         <tr key={indx}>
                             <th> {indx + 1} </th>
                             <th> {cred.date} </th>
                             <th> {cred.amount} </th>
                             <th> {cred.description} </th>
                         </tr>
-                    ))}
+                    )) :
+                    <p>none</p>}
                 </tbody>
             </Table>
-        </>
+        </div>
     )
 }
 
